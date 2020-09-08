@@ -1,0 +1,7 @@
+import mensajeros.*
+
+test "Queremos tests!" {
+
+	assert.that(true)
+
+}
