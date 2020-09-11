@@ -37,7 +37,13 @@ object roberto{
 		return transporte
 	}
 	method peso(){
-		return peso+transporte.peso()
+		if(transporte != null)
+			return peso+transporte.peso()
+		else 
+			return peso
+	}
+	method puedeLlamar(){
+		return false
 	}
 }
 
@@ -46,13 +52,16 @@ object chuckNorris{
 	method peso(){
 		return peso
 	}
+	method puedeLlamar(){
+		return true
+	}
 }
 object neo{
-	var peso = 0
+	//var peso = 0
 	var credito = 0
 	
 	method peso(){
-		return peso
+		return 0
 	}
 	method agregarCredito(monto){
 		credito = credito + monto
