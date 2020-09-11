@@ -17,13 +17,13 @@ object paquete {
 //	Destinos
 object puenteDeBrooklyn{
 	method dejaPasarA(persona){
-		return true
+		return persona.peso()<= 1000
 	}
 }
 
 object laMatrix{
 	method dejaPasarA(persona){
-		return true
+		return persona.puedeLlamar()
 	}
 }
 //	Mensajeros
@@ -37,7 +37,7 @@ object roberto{
 		return transporte
 	}
 	method peso(){
-		
+		return peso+transporte.peso()
 	}
 }
 
@@ -68,7 +68,7 @@ object camion{
 		return numAcoplados
 	}
 	method peso(){
-		return 
+		return 500*numAcoplados
 	}
 	method agregarAcoplado(){
 		numAcoplados ++
@@ -78,6 +78,6 @@ object camion{
 object bici{
 	var peso = 1
 	method peso(){
-		
+		return peso
 	}
 }
