@@ -1,7 +1,19 @@
 import mensajeros.*
 
-test "Queremos tests!" {
-
-	assert.that(true)
-
+test "El paquete esta pagado y un mensajero que viaja en camion con 1 acoplado sí puede llegar a destino" {
+	paquete.pagado()
+	assert.that(paquete.estaPago())
+	roberto.viajaEn(camion)
+	assert.equals(camion, roberto.transporte())
+	camion.agregarAcoplado()
+	assert.equals(1, camion.numAcoplados())
+	paquete.asignarDestino(puenteDeBrooklyn)
+	assert.that(paquete.puedeSerEntregadoPor(roberto))
+}
+test "Un mensajero con crédito y que el paquete no esta pago no puede viajar a un destino" {
+	neo.agregarCredito(2)
+	assert.that(neo.puedeLlamar())
+	assert.notThat(paquete.estaPago())
+	paquete.asignarDestino(laMatrix)
+	assert.notThat(paquete.puedeSerEntregadoPor(neo))
 }
