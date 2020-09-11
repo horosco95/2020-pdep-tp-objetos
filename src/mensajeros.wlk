@@ -5,7 +5,7 @@ object paquete {
 		destino = nuevoDestino
 	}
 	method puedeSerEntregadoPor(mensajero){
-		return true
+		return destino.dejaPasarA(mensajero) && self.estaPago()
 	}
 	method estaPago(){
 		return estaPago
