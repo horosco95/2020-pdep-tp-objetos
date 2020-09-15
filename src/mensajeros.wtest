@@ -1,19 +1,40 @@
 import mensajeros.*
 
-test "El paquete esta pagado y un mensajero que viaja en camion con 1 acoplado sí puede llegar a destino" {
+test "El paquete esta pagado y un mensajero que viaja en camion con ningun o un acoplado sí puede llegar a destino" {
 	paquete.pagado()
-	assert.that(paquete.estaPago())
 	roberto.viajaEn(camion)
-	assert.equals(camion, roberto.transporte())
 	camion.agregarAcoplado()
 	assert.equals(1, camion.numAcoplados())
 	paquete.asignarDestino(puenteDeBrooklyn)
 	assert.that(paquete.puedeSerEntregadoPor(roberto))
 }
-test "Un mensajero con crédito y que el paquete no esta pago no puede viajar a un destino" {
+test "El paquete esta pagado y un mensajero que viaja en camion con dos o más acoplados no puede llegar a destino" {
+	paquete.pagado()
+	roberto.viajaEn(camion)
+	camion.agregarAcoplado()
+	camion.agregarAcoplado()
+	paquete.asignarDestino(puenteDeBrooklyn)
+	assert.notThat(paquete.puedeSerEntregadoPor(roberto))
+}
+test "Un mensajero con crédito y el paquete no esta pago no puede viajar a un destino" {
 	neo.agregarCredito(2)
 	assert.that(neo.puedeLlamar())
 	assert.notThat(paquete.estaPago())
 	paquete.asignarDestino(laMatrix)
 	assert.notThat(paquete.puedeSerEntregadoPor(neo))
+}
+test "Un mensajero con paquete pago y con transporte no puede llegar a destino" {
+	paquete.pagado()
+	roberto.viajaEn(bici)
+	paquete.asignarDestino(laMatrix)
+	assert.notThat(paquete.puedeSerEntregadoPor(roberto))
+}
+test "Un destino permite ingresar a un mensajero que pesa menos de 1000 kilos" {
+	assert.that(puenteDeBrooklyn.dejaPasarA(chuckNorris))
+}
+test "Un destino no permite ingresar a un mensajero que pesa mas de 1000 kilos" {
+	roberto.viajaEn(camion)
+	camion.agregarAcoplado()
+	camion.agregarAcoplado()
+	assert.notThat(puenteDeBrooklyn.dejaPasarA(roberto))
 }
