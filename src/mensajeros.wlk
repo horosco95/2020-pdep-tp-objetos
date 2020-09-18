@@ -90,3 +90,33 @@ object bici{
 		return peso
 	}
 }
+//Objetos - 2da Entrega
+object mensajeria{
+	const mensajeros = []
+	
+	method contratar(nuevoMensajero){
+		mensajeros.add(nuevoMensajero)
+	}
+	method despedir(mensajero){
+		
+	}
+	method despedirTodos(){
+		
+	}
+	method esMensajeriaGrande(){
+		return true
+	}
+	method puedeEntregarElPrimero(){
+		
+		return true
+	}
+	method pesoUltimoMensajero(){
+		return 0
+	}
+}
+object paquetito{
+	
+}
+object paqueton{
+	
+}
