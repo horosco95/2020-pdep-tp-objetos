@@ -97,7 +97,7 @@ object bici{
 //Objetos - 2da Entrega
 object mensajeria{
 	const mensajeros = []
-	
+	var property pendientes = []
 	method contratar(nuevoMensajero){
 		mensajeros.add(nuevoMensajero)
 	}
@@ -115,6 +115,33 @@ object mensajeria{
 	}
 	method pesoUltimoMensajero(){
 		return mensajeros.last().peso()
+	}
+	//Agregando requerimientos
+	method algunoPuedeEntregar(unPaquete){
+		return mensajeros.any( {mensajero => unPaquete.puedeSerEntregadoPor(mensajero)} )
+	}
+	method mensajerosQuePuedenLlevar(unPaquete){
+		return mensajeros.filter( {mensajero => unPaquete.puedeSerEntregadoPor(mensajero)} )
+	}
+	method tieneSobrepeso(){
+		var totalPeso = mensajeros.sum( {mensajero => mensajero.peso()} )
+		var cantidadMensajeros = mensajeros.size()
+		return totalPeso / cantidadMensajeros > 500
+	}
+	method enviar(unPaquete){
+		if ( not self.algunoPuedeEntregar(unPaquete) )
+      		self.pendientes(unPaquete)
+	}
+	method enviarTodos(paquetes){
+		paquetes.map( {paquete => self.enviar(paquete)} )
+	}
+	method pendienteMasCaro(){
+		var masCaro = pendientes.max( {paquete => paquete.precio() } )
+		if ( self.algunoPuedeEntregar(masCaro) )
+		{
+			self.enviar(masCaro)
+			pendientes.remove(masCaro)
+		}
 	}
 }
 object paquetito{
