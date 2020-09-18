@@ -13,6 +13,10 @@ object paquete {
 	method pagado(){
 		estaPago = true
 	}
+	//metodo agregado para 2da entrega
+	method precio(){
+		return 50
+	}
 }
 //	Destinos
 object puenteDeBrooklyn{
@@ -115,8 +119,28 @@ object mensajeria{
 	}
 }
 object paquetito{
-	
+	const property precio = 0
+	method estaPago(){
+		return true
+	}
+	method puedeSerEntregadoPor(mensajero){
+		return true
+	}
 }
 object paqueton{
+	var destinos = []
+	var pagado = 0
 	
+	method estaPago(){
+		return pagado >= self.precio()
+	}
+	method puedeSerEntregadoPor(mensajero){
+		return self.estaPago() && destinos.all({destino => destino.dejaPasarA(mensajero)})
+	}
+	method precio(){
+		return destinos.size() * 100
+	}
+	method pagar(importe){
+		pagado += importe
+	}
 }
