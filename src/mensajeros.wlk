@@ -102,20 +102,19 @@ object mensajeria{
 		mensajeros.add(nuevoMensajero)
 	}
 	method despedir(mensajero){
-		
+		mensajeros.remove(mensajero)
 	}
 	method despedirTodos(){
-		
+		mensajeros.clear()
 	}
 	method esMensajeriaGrande(){
-		return true
+		return mensajeros.size() > 2
 	}
-	method puedeEntregarElPrimero(){
-		
-		return true
+	method puedeEntregarElPrimero(unPaquete){
+		return unPaquete.puedeSerEntregadoPor( mensajeros.first() )
 	}
 	method pesoUltimoMensajero(){
-		return 0
+		return mensajeros.last().peso()
 	}
 }
 object paquetito{
