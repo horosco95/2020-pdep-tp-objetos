@@ -133,7 +133,7 @@ object mensajeria{
       		self.pendientes(unPaquete)
 	}
 	method enviarTodos(paquetes){
-		paquetes.map( {paquete => self.enviar(paquete)} )
+		paquetes.forEach( {paquete => self.enviar(paquete)} )
 	}
 	method pendienteMasCaro(){
 		var masCaro = pendientes.max( {paquete => paquete.precio() } )
