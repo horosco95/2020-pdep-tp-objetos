@@ -52,5 +52,26 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		mensajeria.despedir(roberto)
 		assert.notThat( mensajeria.mensajeros().contains(roberto) )
 	}
-		
+	test "Una empresa de mensajeria despide a todos los mensajeros efectivamente"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(chuckNorris)
+		mensajeria.despedirTodos()
+		assert.that( mensajeria.mensajeros().isEmpty() )
+	}
+	test "Una empresa de mensajería que tiene 2 o menos mensajeros no es grande"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(chuckNorris)
+		assert.notThat( mensajeria.esMensajeriaGrande() )
+	}
+	test "El primer empleado de la empresa puede entregar un paquete pagado"{
+		mensajeria.contratar(neo)
+		paquete.pagado()
+		paquete.asignarDestino(puenteDeBrooklyn)
+		assert.that( mensajeria.puedeEntregarElPrimero(paquete) )
+	}
+	test "Conocer el peso del último empleado de la empresa de mensajería"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(chuckNorris)
+		assert.equals(900, mensajeria.pesoUltimoMensajero() )
+	}	
 }
