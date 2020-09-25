@@ -143,6 +143,7 @@ object mensajeria{
 			pendientes.remove(masCaro)
 		}
 	}
+	method mensajeros() = mensajeros
 }
 object paquetito{
 	const property precio = 0

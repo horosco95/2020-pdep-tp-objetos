@@ -41,7 +41,16 @@ describe "Test de mensajeros y destinos - 1ra entrega"{
 }
 // Test para 2da entrega del TP.
 describe "Test de mensajería y paquetes - 2da entrega"{
-	test "Example"{
-		assert.that(true)
+	test "Un mensajero es contratado por empresa de mensajería efectivamente"{
+		mensajeria.contratar(neo)
+		assert.that( mensajeria.mensajeros().contains(neo) )
 	}
+	test "Un mensajero que pertenece a una empresa de mensajeria puede ser despedido"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(roberto)
+		mensajeria.contratar(chuckNorris)
+		mensajeria.despedir(roberto)
+		assert.notThat( mensajeria.mensajeros().contains(roberto) )
+	}
+		
 }
