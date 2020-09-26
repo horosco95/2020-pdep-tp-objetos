@@ -121,4 +121,30 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		mensajeria.enviar(paqueton)
 		assert.notThat( mensajeria.pendientes().isEmpty() )
 	}
+	test "Todos los paquetes recibidos en una mensajeria son enviados sin quedar pendientes" {
+		mensajeria.contratar(neo)
+		mensajeria.contratar(chuckNorris)
+		mensajeria.contratar(roberto)
+		roberto.viajaEn(camion)
+		camion.agregarAcoplado()
+		paqueton.destinos(laMatrix)
+		paqueton.destinos(puenteDeBrooklyn)
+		paqueton.pagar(200)
+		mensajeria.enviarTodos([paqueton,paquetito])
+		assert.that( mensajeria.pendientes().isEmpty() )
+	}
+	test "Una empresa de mensajeria envia el paquete mas caro de aquellos que estan pendientes" {
+		mensajeria.contratar(neo)
+		mensajeria.contratar(chuckNorris)
+		mensajeria.contratar(roberto)
+		roberto.viajaEn(camion)
+		camion.agregarAcoplado()
+		paqueton.destinos(laMatrix)
+		paqueton.destinos(puenteDeBrooklyn)
+		paqueton.pagar(200)
+		mensajeria.pendientes(paquetito)
+		mensajeria.pendientes(paqueton)
+		mensajeria.pendienteMasCaro()
+		assert.notThat( mensajeria.pendientes().contains(paqueton) )
+	}
 }
