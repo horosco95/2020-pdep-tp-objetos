@@ -1,4 +1,22 @@
-import mensajeros.*
+import mensajeros.*	
+//agregado para cumplir requerimiento 2da entrega - punto 7-g
+object mensajeroRandom {
+	method peso() = 111
+	method puedeLlamar(){
+		return true
+	}
+}
+
+object paqueteRaro{
+	const property precio = 99999
+	method estaPago(){
+		return true
+	}
+	method puedeSerEntregadoPor(mensajero){
+		return true
+	}
+}	
+//-----------
 describe "Test de mensajeros y destinos - 1ra entrega"{
 	test "El paquete esta pagado y un mensajero que viaja en camion con ningun o un acoplado sí puede llegar a destino" {
 	paquete.pagado()
@@ -41,6 +59,7 @@ describe "Test de mensajeros y destinos - 1ra entrega"{
 }
 // Test para 2da entrega del TP.
 describe "Test de mensajería y paquetes - 2da entrega"{
+
 	test "Un mensajero es contratado por empresa de mensajería efectivamente"{
 		mensajeria.contratar(neo)
 		assert.that( mensajeria.mensajeros().contains(neo) )
@@ -146,5 +165,11 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		mensajeria.pendientes(paqueton)
 		mensajeria.pendienteMasCaro()
 		assert.notThat( mensajeria.pendientes().contains(paqueton) )
+	}
+	test "Dado un mensajero desconocido, puede trabajar en la mensajeria, recibiendo un paquete raro para su entrega en forma efectiva" {
+		mensajeria.contratar(mensajeroRandom)
+		mensajeria.pendientes(paqueteRaro)
+		mensajeria.pendienteMasCaro()
+		assert.that( mensajeria.pendientes().isEmpty() )
 	}
 }
