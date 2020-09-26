@@ -170,4 +170,7 @@ object paqueton{
 	method pagar(importe){
 		pagado += importe
 	}
+	method destinos(nuevoDestino){
+		destinos.add(nuevoDestino)
+	}
 }

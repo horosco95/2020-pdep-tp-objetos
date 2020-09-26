@@ -74,4 +74,19 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		mensajeria.contratar(chuckNorris)
 		assert.equals(900, mensajeria.pesoUltimoMensajero() )
 	}	
+	test "La empresa sabe que uno de sus empleados puede entregar un paquete pagado"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(chuckNorris)
+		assert.that( mensajeria.algunoPuedeEntregar(paquetito) )	
+	}
+	test "Devuelve una lista de empleados que pueden entregar un paquete pagado"{
+		paqueton.destinos(laMatrix)
+		paqueton.destinos(puenteDeBrooklyn)
+		paqueton.pagar(200)
+		mensajeria.contratar(neo)
+		mensajeria.contratar(roberto)
+		mensajeria.contratar(chuckNorris)
+		assert.notThat( mensajeria.mensajerosQuePuedenLlevar(paqueton).isEmpty() )
+	}
+	
 }
