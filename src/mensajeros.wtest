@@ -88,5 +88,37 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		mensajeria.contratar(chuckNorris)
 		assert.notThat( mensajeria.mensajerosQuePuedenLlevar(paqueton).isEmpty() )
 	}
-	
+	test "Una mensajeria que tiene empleados cuyo peso promedio es menor o igual a 500 kg. no tiene sobrepeso"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(roberto)
+		assert.notThat( mensajeria.tieneSobrepeso() )
+	}
+	test "Una mensajeria que tiene empleados cuyo peso promedio es mayor a 500 kg. si tiene sobrepeso"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(roberto)
+		roberto.viajaEn(camion)
+		camion.agregarAcoplado()
+		camion.agregarAcoplado()
+		mensajeria.contratar(chuckNorris)
+		assert.that( mensajeria.tieneSobrepeso() )
+	}
+	test "Una empresa de mensajeria con empleados que pueden entregar un paquete lo envia y no queda pendiente"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(roberto)
+		roberto.viajaEn(camion)
+		camion.agregarAcoplado()
+		mensajeria.enviar(paquetito)
+		assert.that( mensajeria.pendientes().isEmpty() )
+	}
+	test "Una empresa de mensajeria sin empleados posibles para entregar un paquete lo envia y queda pendiente"{
+		mensajeria.contratar(neo)
+		mensajeria.contratar(roberto)
+		roberto.viajaEn(camion)
+		camion.agregarAcoplado()
+		paqueton.destinos(laMatrix)
+		paqueton.destinos(puenteDeBrooklyn)
+		paqueton.pagar(100)
+		mensajeria.enviar(paqueton)
+		assert.notThat( mensajeria.pendientes().isEmpty() )
+	}
 }

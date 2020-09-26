@@ -97,7 +97,7 @@ object bici{
 //Objetos - 2da Entrega
 object mensajeria{
 	const mensajeros = []
-	var property pendientes = []
+	const property pendientes = []
 	method contratar(nuevoMensajero){
 		mensajeros.add(nuevoMensajero)
 	}
@@ -143,6 +143,7 @@ object mensajeria{
 			pendientes.remove(masCaro)
 		}
 	}
+	method pendientes(unPaquete) = pendientes.add(unPaquete)
 	method mensajeros() = mensajeros
 }
 object paquetito{
