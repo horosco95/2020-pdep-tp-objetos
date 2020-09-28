@@ -103,26 +103,23 @@ object mensajeria{
 		return mensajeros.filter( {mensajero => unPaquete.puedeSerEntregadoPor(mensajero)} )
 	}
 	method tieneSobrepeso(){
-		var totalPeso = mensajeros.sum( {mensajero => mensajero.peso()} )
-		var cantidadMensajeros = mensajeros.size()
+		const totalPeso = mensajeros.sum( {mensajero => mensajero.peso()} )
+		const cantidadMensajeros = mensajeros.size()
 		return totalPeso / cantidadMensajeros > 500
 	}
 	method enviar(unPaquete){
 		if ( not self.algunoPuedeEntregar(unPaquete) )
-      		self.pendientes(unPaquete)
+      		self.almacenarComoPendiente(unPaquete)
 	}
 	method enviarTodos(paquetes){
 		paquetes.forEach( {paquete => self.enviar(paquete)} )
 	}
-	method pendienteMasCaro(){
-		var masCaro = pendientes.max( {paquete => paquete.precio() } )
-		if ( self.algunoPuedeEntregar(masCaro) )
-		{
-			self.enviar(masCaro)
-			pendientes.remove(masCaro)
-		}
+	method enviarPendienteMasCaro(){
+		const masCaro = pendientes.max( {paquete => paquete.precio() } )
+		self.enviar(masCaro)
+		pendientes.remove(masCaro)
 	}
-	method pendientes(unPaquete) = pendientes.add(unPaquete)
+	method almacenarComoPendiente(unPaquete) = pendientes.add(unPaquete)
 	method mensajeros() = mensajeros
 }
 object paquetito{

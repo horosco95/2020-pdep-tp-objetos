@@ -162,15 +162,15 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		paqueton.destinos(laMatrix)
 		paqueton.destinos(puenteDeBrooklyn)
 		paqueton.pagar(200)
-		mensajeria.pendientes(paquetito)
-		mensajeria.pendientes(paqueton)
-		mensajeria.pendienteMasCaro()
+		mensajeria.almacenarComoPendiente(paquetito)
+		mensajeria.almacenarComoPendiente(paqueton)
+		mensajeria.enviarPendienteMasCaro()
 		assert.notThat( mensajeria.pendientes().contains(paqueton) )
 	}
 	test "Dado un mensajero desconocido, puede trabajar en la mensajeria, recibiendo un paquete raro para su entrega en forma efectiva" {
 		mensajeria.contratar(mensajeroRandom)
-		mensajeria.pendientes(paqueteRaro)
-		mensajeria.pendienteMasCaro()
+		mensajeria.almacenarComoPendiente(paqueteRaro)
+		mensajeria.enviarPendienteMasCaro()
 		assert.that( mensajeria.pendientes().isEmpty() )
 	}
 }
