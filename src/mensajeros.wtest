@@ -1,136 +1,164 @@
-import mensajeros.*	
+import mensajeros.*
+
 //agregado para cumplir requerimiento 2da entrega - punto 7-g
 object mensajeroRandom {
+
 	method peso() = 111
-	method puedeLlamar(){
+
+	method puedeLlamar() {
 		return true
 	}
+
 }
 
-object paqueteRaro{
+object paqueteRaro {
+
 	const property precio = 99999
-	method estaPago(){
-		return true
-	}
-	method puedeSerEntregadoPor(mensajero){
-		return true
-	}
-}	
-//-----------
-describe "Test de mensajeros y destinos - 1ra entrega"{
-	test "El paquete esta pagado y un mensajero que viaja en camion con ningun o un acoplado sí puede llegar a destino" {
-	paquete.pagado()
-	roberto.viajaEn(camion)
-	camion.agregarAcoplado()
-	assert.equals(1, camion.numAcoplados())
-	paquete.asignarDestino(puenteDeBrooklyn)
-	assert.that(paquete.puedeSerEntregadoPor(roberto))
-	}
-	test "El paquete esta pagado y un mensajero que viaja en camion con dos o más acoplados no puede llegar a destino" {
-	paquete.pagado()
-	roberto.viajaEn(camion)
-	camion.agregarAcoplado()
-	camion.agregarAcoplado()
-	paquete.asignarDestino(puenteDeBrooklyn)
-	assert.notThat(paquete.puedeSerEntregadoPor(roberto))
-	}
-	test "Un mensajero con crédito y el paquete no esta pago no puede viajar a un destino" {
-	neo.agregarCredito(2)
-	assert.that(neo.puedeLlamar())
-	assert.notThat(paquete.estaPago())
-	paquete.asignarDestino(laMatrix)
-	assert.notThat(paquete.puedeSerEntregadoPor(neo))
-	}
-	test "Un mensajero con paquete pago y con transporte no puede llegar a destino" {
-	paquete.pagado()
-	roberto.viajaEn(bici)
-	paquete.asignarDestino(laMatrix)
-	assert.notThat(paquete.puedeSerEntregadoPor(roberto))
-	}
-	test "Un destino permite ingresar a un mensajero que pesa menos de 1000 kilos" {
-	assert.that(puenteDeBrooklyn.dejaPasarA(chuckNorris))
-	}
-	test "Un destino no permite ingresar a un mensajero que pesa mas de 1000 kilos" {
-	roberto.viajaEn(camion)
-	camion.agregarAcoplado()
-	camion.agregarAcoplado()
-	assert.notThat(puenteDeBrooklyn.dejaPasarA(roberto))
-	}
-}
-// Test para 2da entrega del TP.
-describe "Test de mensajería y paquetes - 2da entrega"{
 
-	test "Un mensajero es contratado por empresa de mensajería efectivamente"{
-		mensajeria.contratar(neo)
-		assert.that( mensajeria.mensajeros().contains(neo) )
+	method estaPago() {
+		return true
 	}
-	test "Un mensajero que pertenece a una empresa de mensajeria puede ser despedido"{
+
+	method puedeSerEntregadoPor(mensajero) {
+		return true
+	}
+
+}
+
+//-----------
+describe "Test de mensajeros y destinos - 1ra entrega" {
+
+	test "El paquete esta pagado y un mensajero que viaja en camion con ningun o un acoplado sí puede llegar a destino" {
+		paquete.pagado()
+		roberto.viajaEn(camion)
+		camion.agregarAcoplado()
+		assert.equals(1, camion.numAcoplados())
+		paquete.asignarDestino(puenteDeBrooklyn)
+		assert.that(paquete.puedeSerEntregadoPor(roberto))
+	}
+
+	test "El paquete esta pagado y un mensajero que viaja en camion con dos o más acoplados no puede llegar a destino" {
+		paquete.pagado()
+		roberto.viajaEn(camion)
+		camion.agregarAcoplado()
+		camion.agregarAcoplado()
+		paquete.asignarDestino(puenteDeBrooklyn)
+		assert.notThat(paquete.puedeSerEntregadoPor(roberto))
+	}
+
+	test "Un mensajero con crédito y el paquete no esta pago no puede viajar a un destino" {
+		neo.agregarCredito(2)
+		assert.that(neo.puedeLlamar())
+		assert.notThat(paquete.estaPago())
+		paquete.asignarDestino(laMatrix)
+		assert.notThat(paquete.puedeSerEntregadoPor(neo))
+	}
+
+	test "Un mensajero con paquete pago y con transporte no puede llegar a destino" {
+		paquete.pagado()
+		roberto.viajaEn(bici)
+		paquete.asignarDestino(laMatrix)
+		assert.notThat(paquete.puedeSerEntregadoPor(roberto))
+	}
+
+	test "Un destino permite ingresar a un mensajero que pesa menos de 1000 kilos" {
+		assert.that(puenteDeBrooklyn.dejaPasarA(chuckNorris))
+	}
+
+	test "Un destino no permite ingresar a un mensajero que pesa mas de 1000 kilos" {
+		roberto.viajaEn(camion)
+		camion.agregarAcoplado()
+		camion.agregarAcoplado()
+		assert.notThat(puenteDeBrooklyn.dejaPasarA(roberto))
+	}
+
+}
+
+// Test para 2da entrega del TP.
+describe "Test de mensajería y paquetes - 2da entrega" {
+
+	test "Un mensajero es contratado por empresa de mensajería efectivamente" {
+		mensajeria.contratar(neo)
+		assert.that(mensajeria.mensajeros().contains(neo))
+	}
+
+	test "Un mensajero que pertenece a una empresa de mensajeria puede ser despedido" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(roberto)
 		mensajeria.contratar(chuckNorris)
 		mensajeria.despedir(roberto)
-		assert.notThat( mensajeria.mensajeros().contains(roberto) )
+		assert.notThat(mensajeria.mensajeros().contains(roberto))
 	}
-	test "Una empresa de mensajeria despide a todos los mensajeros efectivamente"{
+
+	test "Una empresa de mensajeria despide a todos los mensajeros efectivamente" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(chuckNorris)
 		mensajeria.despedirTodos()
-		assert.that( mensajeria.mensajeros().isEmpty() )
+		assert.that(mensajeria.mensajeros().isEmpty())
 	}
-	test "Una empresa de mensajería que tiene 2 o menos mensajeros no es grande"{
+
+	test "Una empresa de mensajería que tiene 2 o menos mensajeros no es grande" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(chuckNorris)
-		assert.notThat( mensajeria.esMensajeriaGrande() )
+		assert.notThat(mensajeria.esMensajeriaGrande())
 	}
-	test "El primer empleado de la empresa puede entregar un paquete pagado"{
+
+	test "El primer empleado de la empresa puede entregar un paquete pagado" {
 		mensajeria.contratar(neo)
 		paquete.pagado()
 		paquete.asignarDestino(puenteDeBrooklyn)
-		assert.that( mensajeria.puedeEntregarElPrimero(paquete) )
+		assert.that(mensajeria.puedeEntregarElPrimero(paquete))
 	}
-	test "Conocer el peso del último empleado de la empresa de mensajería"{
+
+	test "Conocer el peso del último empleado de la empresa de mensajería" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(chuckNorris)
-		assert.equals(900, mensajeria.pesoUltimoMensajero() )
-	}	
-	test "La empresa sabe que uno de sus empleados puede entregar un paquete pagado"{
+		assert.equals(900, mensajeria.pesoUltimoMensajero())
+	}
+
+	test "La empresa sabe que uno de sus empleados puede entregar un paquete pagado" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(chuckNorris)
-		assert.that( mensajeria.algunoPuedeEntregar(paquetito) )	
+		assert.that(mensajeria.algunoPuedeEntregar(paquetito))
 	}
-	test "Devuelve una lista de empleados que pueden entregar un paquete pagado"{
+
+	test "Devuelve una lista de empleados que pueden entregar un paquete pagado" {
 		paqueton.destinos(laMatrix)
 		paqueton.destinos(puenteDeBrooklyn)
 		paqueton.pagar(200)
 		mensajeria.contratar(neo)
 		mensajeria.contratar(roberto)
 		mensajeria.contratar(chuckNorris)
-		assert.notThat( mensajeria.mensajerosQuePuedenLlevar(paqueton).isEmpty() )
+		assert.notThat(mensajeria.mensajerosQuePuedenLlevar(paqueton).isEmpty())
 	}
-	test "Una mensajeria que tiene empleados cuyo peso promedio es menor o igual a 500 kg. no tiene sobrepeso"{
+
+	test "Una mensajeria que tiene empleados cuyo peso promedio es menor o igual a 500 kg. no tiene sobrepeso" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(roberto)
 		roberto.viajaEn(bici)
-		assert.notThat( mensajeria.tieneSobrepeso() )
+		assert.notThat(mensajeria.tieneSobrepeso())
 	}
-	test "Una mensajeria que tiene empleados cuyo peso promedio es mayor a 500 kg. si tiene sobrepeso"{
+
+	test "Una mensajeria que tiene empleados cuyo peso promedio es mayor a 500 kg. si tiene sobrepeso" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(roberto)
 		roberto.viajaEn(camion)
 		camion.agregarAcoplado()
 		camion.agregarAcoplado()
 		mensajeria.contratar(chuckNorris)
-		assert.that( mensajeria.tieneSobrepeso() )
+		assert.that(mensajeria.tieneSobrepeso())
 	}
-	test "Una empresa de mensajeria con empleados que pueden entregar un paquete lo envia y no queda pendiente"{
+
+	test "Una empresa de mensajeria con empleados que pueden entregar un paquete lo envia y no queda pendiente" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(roberto)
 		roberto.viajaEn(camion)
 		camion.agregarAcoplado()
 		mensajeria.enviar(paquetito)
-		assert.that( mensajeria.pendientes().isEmpty() )
+		assert.that(mensajeria.pendientes().isEmpty())
 	}
-	test "Una empresa de mensajeria sin empleados posibles para entregar un paquete lo envia y queda pendiente"{
+
+	test "Una empresa de mensajeria sin empleados posibles para entregar un paquete lo envia y queda pendiente" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(roberto)
 		roberto.viajaEn(camion)
@@ -139,8 +167,9 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		paqueton.destinos(puenteDeBrooklyn)
 		paqueton.pagar(100)
 		mensajeria.enviar(paqueton)
-		assert.notThat( mensajeria.pendientes().isEmpty() )
+		assert.notThat(mensajeria.pendientes().isEmpty())
 	}
+
 	test "Todos los paquetes recibidos en una mensajeria son enviados sin quedar pendientes" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(chuckNorris)
@@ -150,9 +179,10 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		paqueton.destinos(laMatrix)
 		paqueton.destinos(puenteDeBrooklyn)
 		paqueton.pagar(200)
-		mensajeria.enviarTodos([paqueton,paquetito])
-		assert.that( mensajeria.pendientes().isEmpty() )
+		mensajeria.enviarTodos([ paqueton, paquetito ])
+		assert.that(mensajeria.pendientes().isEmpty())
 	}
+
 	test "Una empresa de mensajeria envia el paquete mas caro de aquellos que estan pendientes" {
 		mensajeria.contratar(neo)
 		mensajeria.contratar(chuckNorris)
@@ -165,12 +195,15 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 		mensajeria.almacenarComoPendiente(paquetito)
 		mensajeria.almacenarComoPendiente(paqueton)
 		mensajeria.enviarPendienteMasCaro()
-		assert.notThat( mensajeria.pendientes().contains(paqueton) )
+		assert.notThat(mensajeria.pendientes().contains(paqueton))
 	}
+
 	test "Dado un mensajero desconocido, puede trabajar en la mensajeria, recibiendo un paquete raro para su entrega en forma efectiva" {
 		mensajeria.contratar(mensajeroRandom)
 		mensajeria.almacenarComoPendiente(paqueteRaro)
 		mensajeria.enviarPendienteMasCaro()
-		assert.that( mensajeria.pendientes().isEmpty() )
+		assert.that(mensajeria.pendientes().isEmpty())
 	}
+
 }
+
