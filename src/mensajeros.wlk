@@ -7,16 +7,12 @@ object paquete {
 	method puedeSerEntregadoPor(mensajero){
 		return destino.dejaPasarA(mensajero) && self.estaPago()
 	}
-	method estaPago(){
-		return estaPago
-	}
+	method estaPago() = estaPago
 	method pagado(){
 		estaPago = true
 	}
 	//metodo agregado para 2da entrega
-	method precio(){
-		return 50
-	}
+	method precio() = 50
 }
 //	Destinos
 object puenteDeBrooklyn{
@@ -32,41 +28,27 @@ object laMatrix{
 }
 //	Mensajeros
 object roberto{
-	var peso = 90
 	var transporte
 	method viajaEn(nuevoTransporte){
 		transporte = nuevoTransporte
 	}
-	method transporte(){
-		return transporte
-	}
-	method peso(){
-		if(transporte != null)
-			return peso+transporte.peso()
-		else 
-			return peso
-	}
+	method transporte() = transporte
+	method peso() = 90 + transporte.peso()
 	method puedeLlamar(){
 		return false
 	}
 }
 
 object chuckNorris{
-	var peso = 900
-	method peso(){
-		return peso
-	}
+	method peso() = 900
 	method puedeLlamar(){
 		return true
 	}
 }
 object neo{
-	//var peso = 0
 	var credito = 0
 	
-	method peso(){
-		return 0
-	}
+	method peso() = 0
 	method agregarCredito(monto){
 		credito = credito + monto
 	}
@@ -89,10 +71,7 @@ object camion{
 	
 }
 object bici{
-	var peso = 1
-	method peso(){
-		return peso
-	}
+	const property peso = 1
 }
 //Objetos - 2da Entrega
 object mensajeria{
@@ -156,7 +135,7 @@ object paquetito{
 	}
 }
 object paqueton{
-	var destinos = []
+	const destinos = []
 	var pagado = 0
 	
 	method estaPago(){

@@ -110,6 +110,7 @@ describe "Test de mensajería y paquetes - 2da entrega"{
 	test "Una mensajeria que tiene empleados cuyo peso promedio es menor o igual a 500 kg. no tiene sobrepeso"{
 		mensajeria.contratar(neo)
 		mensajeria.contratar(roberto)
+		roberto.viajaEn(bici)
 		assert.notThat( mensajeria.tieneSobrepeso() )
 	}
 	test "Una mensajeria que tiene empleados cuyo peso promedio es mayor a 500 kg. si tiene sobrepeso"{
